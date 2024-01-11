@@ -1,0 +1,35 @@
+/*
+==========
+Variables.
+==========
+*/
+
+:root {
+  /* Spacing. */
+  --ns-spacing-1: 10px;
+
+  /* Buttons. */
+  --ns-button-font-size: 2rem;
+
+  /* Headings. */
+  --ns-h1-font-size: 1.5rem;
+
+  /* Layout. */
+  --ns-layout-color: #565350;
+  --ns-layout-background-color: #f6f3f0;
+
+  /* Links. */
+  --ns-link-color: #06c;
+  --ns-link-color-hover: #c60;
+
+  /* Textarea. */
+  --ns-textarea-color: #565350;
+  --ns-textarea-background-color: #fff;
+  --ns-textarea-font-family: monospace;
+  --ns-textarea-placeholder-opacity: 0.75;
+
+  /* Typography. */
+  --ns-base-font-family: 'Segoe UI', system-ui, sans-serif;
+  --ns-base-font-size: 16px;
+  --ns-base-line-height: 1.5;
+}
