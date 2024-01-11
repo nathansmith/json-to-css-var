@@ -151,23 +151,26 @@
     // Loop through.
     const cssVar = Object.entries(json).reduce((oldStr, [key, value]) => {
       // Build string.
-      const newStr = `${prefix}-${parseKey(key)}`;
+      let newStr = `${prefix}-${parseKey(key)}`;
 
       // Is object: YES.
       if (isObject(value)) {
         // Recursion.
-        return oldStr + jsonToCssVar(value, newStr);
+        newStr = oldStr + jsonToCssVar(value, newStr);
 
         // Is array: YES.
       } else if (Array.isArray(value)) {
         // Expose string.
-        return `${oldStr}${newStr}: ${value.map(parseValue).join(', ')};\n`;
+        newStr = `${oldStr}${newStr}: ${value.map(parseValue).join(', ')};\n`;
 
         // Fallback.
       } else {
         // Expose string.
-        return `${oldStr}${newStr}: ${parseValue(value)};\n`;
+        newStr = `${oldStr}${newStr}: ${parseValue(value)};\n`;
       }
+
+      // Expose string.
+      return newStr;
 
       // Blank accumulator.
     }, '');
