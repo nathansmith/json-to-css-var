@@ -14,11 +14,11 @@ Variables.
   --ns-base-line-height: 1.5;
 
   /* Layout. */
-  --ns-layout-color: #333;
-  --ns-layout-background-color: #cde;
+  --ns-layout-color: #565350;
+  --ns-layout-background-color: #f6f3f0;
 
   /* Textarea. */
-  --ns-textarea-color: #333;
+  --ns-textarea-color: #565350;
   --ns-textarea-background-color: #fff;
 }
 
@@ -41,6 +41,14 @@ html {
   font-size: var(--ns-base-font-size);
   line-height: var(--ns-base-line-height);
   overflow: hidden;
+}
+
+a {
+  color: #06c;
+}
+
+a:hover {
+  color: #c60;
 }
 
 /*
@@ -73,11 +81,19 @@ Layout: header.
 */
 
 .ns-layout__header {
-  /* TODO. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ns-spacing);
 }
 
 .ns-layout__header__title {
+  flex: 1;
+
   font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /*
