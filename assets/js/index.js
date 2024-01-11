@@ -1,5 +1,5 @@
 // ===============
-// START: closure.
+// Closure: START.
 // ===============
 
 (() => {
@@ -121,7 +121,7 @@
       textareaCss.textContent = cssOuter;
     } catch (_error) {
       // Update.
-      textareaCss.textContent = 'Sorry, JSON is invalid.';
+      textareaCss.textContent = '⚠️ Sorry, JSON is invalid.';
     }
   };
 
@@ -308,5 +308,5 @@
 })();
 
 // =============
-// END: closure.
+// Closure: END.
 // =============
