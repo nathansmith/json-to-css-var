@@ -90,11 +90,11 @@
     }
   };
 
-  // =======================
-  // Event: click - convert.
-  // =======================
+  // ======================
+  // Event: click - submit.
+  // ======================
 
-  const handleClickConvert = () => {
+  const handleClickSubmit = () => {
     // Get text.
     const text = textareaJson.value.trim();
 
@@ -272,7 +272,7 @@
 
     // Add events.
     document.addEventListener(DOM_LOADED, handleDomLoaded);
-    buttonSubmit.addEventListener(CLICK, handleClickConvert);
+    buttonSubmit.addEventListener(CLICK, handleClickSubmit);
     textareaCss.addEventListener(CLICK, handleClickSelect);
     textareaJson.addEventListener(BLUR, handleBlur);
     textareaJson.addEventListener(INPUT, handleInput);
@@ -285,7 +285,7 @@
   const removeEvents = () => {
     // Remove events.
     document.removeEventListener(DOM_LOADED, handleDomLoaded);
-    buttonSubmit.removeEventListener(CLICK, handleClickConvert);
+    buttonSubmit.removeEventListener(CLICK, handleClickSubmit);
     textareaCss.removeEventListener(CLICK, handleClickSelect);
     textareaJson.removeEventListener(BLUR, handleBlur);
     textareaJson.removeEventListener(INPUT, handleInput);
