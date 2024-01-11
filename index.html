@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"
+    />
+
+    <title>JSON to CSS var</title>
+
+    <link rel="stylesheet" href="./assets/css/index.css" />
+  </head>
+  <body>
+    <div class="ns-layout">
+      <header class="ns-layout__header">
+        <h1 class="ns-layout__header__title">
+          Convert JSON to CSS variables
+        </h1>
+        <!-- .ns-layout__header__title -->
+      </header>
+      <!-- .ns-layout__header -->
+
+      <main class="ns-layout__main">
+        <textarea
+          autocomplete="off"
+          spellcheck="false"
+
+          aria-label="JSON input"
+          class="ns-textarea"
+          id="TEXTAREA_JSON"
+          placeholder="Enter valid JSON here…"
+        ></textarea>
+        <!-- .ns-textarea -->
+
+        <div class="ns-layout__main__col">
+          <button
+            aria-label="Convert JSON to CSS var"
+            class="ns-button"
+            id="BUTTON_SUBMIT"
+            type="button"
+          >➡️</button>
+          <!-- .ns-button -->
+        </div>
+        <!-- .ns-layout__main__col -->
+
+        <textarea
+          autocomplete="off"
+          spellcheck="false"
+
+          aria-label="CSS output"
+          class="ns-textarea"
+          id="TEXTAREA_CSS"
+          placeholder="Get CSS variables here…"
+          readonly="readonly"
+        ></textarea>
+        <!-- .ns-textarea -->
+      </main>
+      <!-- .ns-layout__main -->
+    </div>
+    <!-- .ns-layout -->
+
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>
