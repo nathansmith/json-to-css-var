@@ -60,7 +60,7 @@
     const value = String(event?.target?.value || '').trim();
 
     // Target exists: YES.
-    if (event.target) {
+    if (event?.target) {
       try {
         // Get JSON.
         let json = JSON.parse(value);
