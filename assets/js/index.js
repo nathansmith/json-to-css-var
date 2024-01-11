@@ -7,9 +7,9 @@
   // Constants.
   // ==========
 
-  const CLICK = 'click';
   const BLUR = 'blur';
-  const DOM_LOADED = 'DOMContentLoaded';
+  const CLICK = 'click';
+  const FOCUS = 'focus';
   const INPUT = 'input';
   const OBJECT = 'object';
 
@@ -76,25 +76,10 @@
   };
 
   // =============
-  // Event: input.
+  // Event: click.
   // =============
 
-  const handleInput = (event) => {
-    // Get value.
-    const value = String(event?.target?.value || '').trim();
-
-    try {
-      window.sessionStorage.setItem(TEXTAREA_JSON, value);
-    } catch (error) {
-      // No-op.
-    }
-  };
-
-  // ======================
-  // Event: click - submit.
-  // ======================
-
-  const handleClickSubmit = () => {
+  const handleClick = () => {
     // Get text.
     const text = textareaJson.value.trim();
 
@@ -125,48 +110,27 @@
     }
   };
 
-  // ======================
-  // Event: click - select.
-  // ======================
+  // =============
+  // Event: focus.
+  // =============
 
-  const handleClickSelect = (event) => {
+  const handleFocus = (event) => {
     // Select text.
     event?.target?.select?.();
   };
 
-  // ==================
-  // Event: DOM loaded.
-  // ==================
+  // =============
+  // Event: input.
+  // =============
 
-  const handleDomLoaded = () => {
-    // Empty textarea: YES.
-    if (!textareaJson.value) {
-      try {
-        // Get cached value.
-        let cachedValue = window.sessionStorage.getItem(TEXTAREA_JSON) || '';
-        cachedValue = cachedValue.trim();
+  const handleInput = (event) => {
+    // Get value.
+    const value = String(event?.target?.value || '').trim();
 
-        // Cached value exists: YES.
-        if (cachedValue) {
-          try {
-            // Get JSON.
-            let json = JSON.parse(cachedValue);
-            json = JSON.stringify(json, null, 2);
-
-            // Update.
-            textareaJson.textContent = json;
-          } catch (error) {
-            // Update.
-            textareaJson.textContent = cachedValue;
-          }
-        } else {
-          // Update.
-          textareaJson.textContent = exampleJson;
-        }
-      } catch (error) {
-        // Update.
-        textareaJson.textContent = exampleJson;
-      }
+    try {
+      window.sessionStorage.setItem(TEXTAREA_JSON, value);
+    } catch (error) {
+      // No-op.
     }
   };
 
@@ -177,56 +141,6 @@
   const isObject = (obj) => {
     // Expose boolean.
     return !!(obj && typeof obj === OBJECT && !Array.isArray(obj));
-  };
-
-  // ==================
-  // Helper: parse key.
-  // ==================
-
-  const parseKey = (key = '') => {
-    // Clean up.
-    let newKey = String(key);
-    newKey = newKey.trim();
-    newKey = newKey.replace(/([a-z0-9])([A-Z])/g, '$1-$2');
-    newKey = newKey.replace(/\s+/g, '-');
-    newKey = newKey.replace(/_+/g, '-');
-    newKey = newKey.replace(/-+/g, '-');
-    newKey = newKey.toLowerCase();
-
-    // Dash at start: YES.
-    if (newKey.startsWith('-')) {
-      // Update.
-      newKey = newKey.slice(1);
-    }
-
-    // Dash at end: YES.
-    if (newKey.endsWith('-')) {
-      // Update.
-      newKey = newKey.slice(0, -1);
-    }
-
-    // Expose string.
-    return newKey;
-  };
-
-  // ====================
-  // Helper: parse value.
-  // ====================
-
-  const parseValue = (value = '') => {
-    // Clean up.
-    let newValue = String(value);
-    newValue = newValue.trim();
-    newValue = newValue.replace(/\s+/g, ' ');
-
-    // Has spaces: YES.
-    if (newValue.match(/\s/g)) {
-      // Update.
-      newValue = `'${newValue}'`;
-    }
-
-    // Expose string.
-    return newValue;
   };
 
   // ========================
@@ -262,6 +176,92 @@
     return cssVar;
   };
 
+  // ==================
+  // Helper: parse key.
+  // ==================
+
+  const parseKey = (key = '') => {
+    // Clean up.
+    let newKey = String(key);
+    newKey = newKey.trim();
+    newKey = newKey.replace(/([a-z0-9])([A-Z])/g, '$1-$2');
+    newKey = newKey.replace(/\s+/g, '-');
+    newKey = newKey.replace(/_+/g, '-');
+    newKey = newKey.replace(/-+/g, '-');
+    newKey = newKey.toLowerCase();
+
+    // Dash at start: YES.
+    if (newKey.startsWith('-')) {
+      // Update.
+      newKey = newKey.slice(1);
+    }
+
+    // Dash at end: YES.
+    if (newKey.endsWith('-')) {
+      // Update.
+      newKey = newKey.slice(0, -1);
+    }
+
+    // Expose string.
+    return newKey;
+  };
+
+  // ============================
+  // Helper: parse textarea JSON.
+  // ============================
+
+  const parseTextareaJson = () => {
+    // Empty textarea: YES.
+    if (!textareaJson.value) {
+      try {
+        // Get cached value.
+        let cachedValue = window.sessionStorage.getItem(TEXTAREA_JSON) || '';
+        cachedValue = cachedValue.trim();
+
+        // Cached value exists: YES.
+        if (cachedValue) {
+          try {
+            // Get JSON.
+            let json = JSON.parse(cachedValue);
+            json = JSON.stringify(json, null, 2);
+
+            // Update.
+            textareaJson.textContent = json;
+          } catch (error) {
+            // Update.
+            textareaJson.textContent = cachedValue;
+          }
+        } else {
+          // Update.
+          textareaJson.textContent = exampleJson;
+        }
+      } catch (error) {
+        // Update.
+        textareaJson.textContent = exampleJson;
+      }
+    }
+  };
+
+  // ====================
+  // Helper: parse value.
+  // ====================
+
+  const parseValue = (value = '') => {
+    // Clean up.
+    let newValue = String(value);
+    newValue = newValue.trim();
+    newValue = newValue.replace(/\s+/g, ' ');
+
+    // Has spaces: YES.
+    if (newValue.match(/\s/g)) {
+      // Update.
+      newValue = `'${newValue}'`;
+    }
+
+    // Expose string.
+    return newValue;
+  };
+
   // ===================
   // Helper: add events.
   // ===================
@@ -271,9 +271,8 @@
     removeEvents();
 
     // Add events.
-    document.addEventListener(DOM_LOADED, handleDomLoaded);
-    buttonSubmit.addEventListener(CLICK, handleClickSubmit);
-    textareaCss.addEventListener(CLICK, handleClickSelect);
+    buttonSubmit.addEventListener(CLICK, handleClick);
+    textareaCss.addEventListener(FOCUS, handleFocus);
     textareaJson.addEventListener(BLUR, handleBlur);
     textareaJson.addEventListener(INPUT, handleInput);
   };
@@ -284,9 +283,8 @@
 
   const removeEvents = () => {
     // Remove events.
-    document.removeEventListener(DOM_LOADED, handleDomLoaded);
-    buttonSubmit.removeEventListener(CLICK, handleClickSubmit);
-    textareaCss.removeEventListener(CLICK, handleClickSelect);
+    buttonSubmit.removeEventListener(CLICK, handleClick);
+    textareaCss.removeEventListener(FOCUS, handleFocus);
     textareaJson.removeEventListener(BLUR, handleBlur);
     textareaJson.removeEventListener(INPUT, handleInput);
   };
@@ -298,6 +296,9 @@
   const onMount = () => {
     // Add events.
     addEvents();
+
+    // Parse JSON.
+    parseTextareaJson();
   };
 
   // ========
