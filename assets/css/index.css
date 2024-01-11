@@ -25,9 +25,10 @@ Variables.
   /* Textarea. */
   --ns-textarea-color: #565350;
   --ns-textarea-background-color: #fff;
+  --ns-textarea-font-family: monospace;
 
   /* Typography. */
-  --ns-base-font-family: sans-serif;
+  --ns-base-font-family: 'Segoe UI', system-ui, sans-serif;
   --ns-base-font-size: 16px;
   --ns-base-line-height: 1.5;
 }
@@ -145,7 +146,7 @@ Textarea.
   color: var(--ns-textarea-color);
   background-color: var(--ns-textarea-background-color);
 
-  font-family: monospace;
+  font-family: var(--ns-textarea-font-family);
   font-size: inherit;
   line-height: inherit;
 
@@ -155,7 +156,8 @@ Textarea.
 
 .ns-textarea::placeholder {
   color: inherit;
-  opacity: 0.5;
+  font-family: var(--ns-base-font-family);
+  opacity: 0.75;
 }
 
 /*
