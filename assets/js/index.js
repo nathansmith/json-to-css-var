@@ -11,7 +11,6 @@
   const CLICK = 'click';
   const FOCUS = 'focus';
   const INPUT = 'input';
-  const OBJECT = 'object';
 
   const BUTTON_SUBMIT = 'BUTTON_SUBMIT';
   const TEXTAREA_CSS = 'TEXTAREA_CSS';
@@ -68,7 +67,7 @@
 
         // Update.
         event.target.value = json;
-      } catch (error) {
+      } catch (_error) {
         // Update.
         event.target.value = value;
       }
@@ -96,14 +95,8 @@
       // Get JSON.
       const json = JSON.parse(value);
 
-      // Inner CSS.
-      const cssInner = jsonToCssVar(json).replaceAll('--', '  --');
-
-      // Outer CSS.
-      const cssOuter = `:root {\n${cssInner}}`;
-
       // Update.
-      textareaCss.textContent = cssOuter;
+      textareaCss.textContent = jsonToCssVar.convert({ json });
     } catch (_error) {
       // Update.
       textareaCss.textContent = '⚠️ Sorry, JSON is invalid.';
@@ -129,84 +122,9 @@
 
     try {
       window.sessionStorage.setItem(TEXTAREA_JSON, value);
-    } catch (error) {
+    } catch (_error) {
       // No-op.
     }
-  };
-
-  // ==================
-  // Helper: is object.
-  // ==================
-
-  const isObject = (obj) => {
-    // Expose boolean.
-    return !!(obj && typeof obj === OBJECT && !Array.isArray(obj));
-  };
-
-  // ========================
-  // Helper: JSON to CSS var.
-  // ========================
-
-  const jsonToCssVar = (json = {}, prefix = '-') => {
-    // Loop through.
-    const cssVar = Object.entries(json).reduce((oldStr, [key, value]) => {
-      // Build string.
-      let newStr = `${prefix}-${parseKey(key)}`;
-
-      // Is object: YES.
-      if (isObject(value)) {
-        // Recursion.
-        newStr = jsonToCssVar(value, newStr);
-
-        // Is array: YES.
-      } else if (Array.isArray(value)) {
-        // Flatten array.
-        newStr = `${newStr}: ${value.map(parseValue).join(', ')};\n`;
-
-        // Fallback.
-      } else {
-        // Add value.
-        newStr = `${newStr}: ${parseValue(value)};\n`;
-      }
-
-      // Expose string.
-      return `${oldStr}${newStr}`;
-
-      // Blank accumulator.
-    }, '');
-
-    // Expose string.
-    return cssVar;
-  };
-
-  // ==================
-  // Helper: parse key.
-  // ==================
-
-  const parseKey = (key = '') => {
-    // Clean up.
-    let newKey = String(key);
-    newKey = newKey.trim();
-    newKey = newKey.replace(/([a-z0-9])([A-Z])/g, '$1-$2');
-    newKey = newKey.replace(/\s+/g, '-');
-    newKey = newKey.replace(/_+/g, '-');
-    newKey = newKey.replace(/-+/g, '-');
-    newKey = newKey.toLowerCase();
-
-    // Dash at start: YES.
-    if (newKey.startsWith('-')) {
-      // Update.
-      newKey = newKey.slice(1);
-    }
-
-    // Dash at end: YES.
-    if (newKey.endsWith('-')) {
-      // Update.
-      newKey = newKey.slice(0, -1);
-    }
-
-    // Expose string.
-    return newKey;
   };
 
   // ============================
@@ -230,7 +148,7 @@
 
             // Update.
             textareaJson.textContent = json;
-          } catch (error) {
+          } catch (_error) {
             // Update.
             textareaJson.textContent = cachedValue;
           }
@@ -238,31 +156,11 @@
           // Update.
           textareaJson.textContent = exampleJson;
         }
-      } catch (error) {
+      } catch (_error) {
         // Update.
         textareaJson.textContent = exampleJson;
       }
     }
-  };
-
-  // ====================
-  // Helper: parse value.
-  // ====================
-
-  const parseValue = (value = '') => {
-    // Clean up.
-    let newValue = String(value);
-    newValue = newValue.trim();
-    newValue = newValue.replace(/\s+/g, ' ');
-
-    // Has spaces: YES.
-    if (newValue.match(/\s/g)) {
-      // Update.
-      newValue = `'${newValue}'`;
-    }
-
-    // Expose string.
-    return newValue;
   };
 
   // ===================
