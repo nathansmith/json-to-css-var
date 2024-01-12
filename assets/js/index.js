@@ -81,10 +81,10 @@
 
   const handleClick = () => {
     // Get text.
-    const text = textareaJson.value.trim();
+    const value = textareaJson.value.trim();
 
-    // Text exists: NO.
-    if (!text) {
+    // Value exists: NO.
+    if (!value) {
       // Update.
       textareaCss.textContent = '';
 
@@ -94,7 +94,7 @@
 
     try {
       // Get JSON.
-      const json = JSON.parse(text);
+      const json = JSON.parse(value);
 
       // Inner CSS.
       const cssInner = jsonToCssVar(json).replaceAll('--', '  --');
