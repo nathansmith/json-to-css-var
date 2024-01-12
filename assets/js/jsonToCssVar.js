@@ -8,10 +8,11 @@ class jsonToCssVar {
   // ================
 
   static convert = ({
+    // Props.
     json = {},
     cssIndent = '  ',
     cssPrefix = '--',
-    cssSelector = ':root'
+    cssSelector = ':root',
   }) => {
     // Get string.
     const oldStr = this.flatten(json);
