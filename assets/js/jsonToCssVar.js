@@ -129,8 +129,39 @@ class jsonToCssVar {
     newValue = newValue.trim();
     newValue = newValue.replace(/\s+/g, ' ');
 
-    // Has spaces: YES.
-    if (newValue.match(/\s/g)) {
+    /*
+    =====
+    NOTE:
+    =====
+
+      This is an attempt to check for a font name string,
+      which may contain uppercase characters and can have
+      spaces within the name of the typeface itself.
+
+      ---
+
+      QUOTES NEEDED:
+
+      ```
+      .example {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      ```
+
+      ---
+
+      Not all values with spaces require quotes.
+
+      QUOTES NOT NEEDED:
+
+      ```
+      .example {
+        background-position: center center;
+      }
+      ```
+    */
+
+    if (newValue.match(/\s/g) && newValue.toLowerCase() !== newValue) {
       // Update.
       newValue = `'${newValue}'`;
     }
