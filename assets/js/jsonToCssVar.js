@@ -18,7 +18,7 @@ class jsonToCssVar {
     const oldStr = this.flatten(json);
 
     // Get list.
-    const oldList = oldStr.split(';');
+    const oldList = oldStr.split(';').sort();
 
     // Set later.
     const newList = [];
