@@ -156,21 +156,21 @@
       // Is object: YES.
       if (isObject(value)) {
         // Recursion.
-        newStr = oldStr + jsonToCssVar(value, newStr);
+        newStr = jsonToCssVar(value, newStr);
 
         // Is array: YES.
       } else if (Array.isArray(value)) {
-        // Expose string.
-        newStr = `${oldStr}${newStr}: ${value.map(parseValue).join(', ')};\n`;
+        // Flatten array.
+        newStr = `${newStr}: ${value.map(parseValue).join(', ')};\n`;
 
         // Fallback.
       } else {
-        // Expose string.
-        newStr = `${oldStr}${newStr}: ${parseValue(value)};\n`;
+        // Add value.
+        newStr = `${newStr}: ${parseValue(value)};\n`;
       }
 
       // Expose string.
-      return newStr;
+      return `${oldStr}${newStr}`;
 
       // Blank accumulator.
     }, '');
