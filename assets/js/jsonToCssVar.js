@@ -23,7 +23,7 @@ class jsonToCssVar {
     const newList = [];
 
     // Loop through.
-    oldList.forEach((item) => {
+    oldList.forEach((item = '') => {
       // Item exists: YES.
       if (item) {
         // Add to list.
@@ -47,7 +47,7 @@ class jsonToCssVar {
     let mainStr = '';
 
     // Loop through.
-    Object.entries(json).forEach(([key, value]) => {
+    Object.entries(json).forEach(([key = '', value = '']) => {
       // Get string.
       let tempStr = this.parseKey(key);
 
@@ -83,7 +83,7 @@ class jsonToCssVar {
   // Method: is object.
   // ==================
 
-  static isObject = (obj) => {
+  static isObject = (obj = null) => {
     // Expose boolean.
     return !!(obj && typeof obj === 'object' && !Array.isArray(obj));
   };
