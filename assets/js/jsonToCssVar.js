@@ -1,12 +1,21 @@
-// =======================
-// Class: JSON to CSS var.
-// =======================
-
+/**
+ * Class with static methods.
+ *
+ * @class jsonToCssVar
+ */
 class jsonToCssVar {
-  // ================
-  // Method: convert.
-  // ================
-
+  /**
+   * Converts JSON object to CSS variables.
+   *
+   * @static
+   * @memberof jsonToCssVar
+   * @param {object} props
+   * @param {object} props.json
+   * @param {string} props.cssIndent
+   * @param {string} props.cssPrefix
+   * @param {string} props.cssSelector
+   * @returns {string}
+   */
   static convert = ({
     // Props.
     json = {},
@@ -39,10 +48,15 @@ class jsonToCssVar {
     return `${cssSelector} {\n${newStr}\n}`;
   };
 
-  // =================================
-  // Method: flatten JSON keys/values.
-  // =================================
-
+  /**
+   * Flattens JSON keys/values into a string.
+   *
+   * @static
+   * @memberof jsonToCssVar
+   * @param {object} json
+   * @param {string} prevStr
+   * @returns {string}
+   */
   static flatten = (json = {}, prevStr = '') => {
     // Set later.
     let mainStr = '';
@@ -80,19 +94,27 @@ class jsonToCssVar {
     return mainStr;
   };
 
-  // ==================
-  // Method: is object.
-  // ==================
-
+  /**
+   * Checks if a value is an object.
+   *
+   * @static
+   * @memberof jsonToCssVar
+   * @param {object} obj
+   * @returns {boolean}
+   */
   static isObject = (obj = null) => {
     // Expose boolean.
     return !!(obj && typeof obj === 'object' && !Array.isArray(obj));
   };
 
-  // ==================
-  // Method: parse key.
-  // ==================
-
+  /**
+   * Normalizes keys to kebab case.
+   *
+   * @static
+   * @memberof jsonToCssVar
+   * @param {string} key
+   * @returns {string}
+   */
   static parseKey = (key = '') => {
     // Clean up.
     let newKey = String(key);
@@ -119,10 +141,14 @@ class jsonToCssVar {
     return newKey;
   };
 
-  // ====================
-  // Helper: parse value.
-  // ====================
-
+  /**
+   * Potentially quotes CSS value.
+   *
+   * @static
+   * @memberof jsonToCssVar
+   * @param {string} value
+   * @returns {string}
+   */
   static parseValue = (value = '') => {
     // Clean up.
     let newValue = String(value);
